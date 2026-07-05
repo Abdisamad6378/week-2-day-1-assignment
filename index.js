@@ -132,3 +132,54 @@ const routes = [
 console.log("\n\n========== TASK 3: Matatu Route System ==========");
 console.log("✅ Matatu routes data loaded successfully!");
 console.log(`Total routes: ${routes.length}`);
+
+// Find cheapest route
+function cheapestRoute(routes) {
+  let cheapest = routes[0];
+  for (let route of routes) {
+    if (route.fare < cheapest.fare) {
+      cheapest = route;
+    }
+  }
+  return `Cheapest: ${cheapest.name} at KES ${cheapest.fare}`;
+}
+
+// Find routes through a specific stop
+function routesThroughStop(routes, stop) {
+  const matchingRoutes = routes.filter(route => 
+    route.stops.includes(stop)
+  );
+  return matchingRoutes.map(route => route.name);
+}
+
+// Calculate journey fare for multiple routes
+function journeyFare(routes, routeNames) {
+  let total = 0;
+  for (let routeName of routeNames) {
+    const route = routes.find(r => r.name === routeName);
+    if (route) {
+      total += route.fare;
+    }
+  }
+  return total;
+}
+
+// ============================================
+// TEST TASK 3
+// ============================================
+console.log("\n--- Cheapest Route ---");
+console.log(cheapestRoute(routes));
+
+console.log("\n--- Routes through Westlands ---");
+const westlandsRoutes = routesThroughStop(routes, "Westlands");
+console.log(`Routes through Westlands: ${westlandsRoutes.join(", ")}`);
+
+console.log("\n--- Journey Fare (Westlands → Kikuyu) ---");
+const fare = journeyFare(routes, ["Route 14 - Westlands", "Route 58 - Kikuyu"]);
+console.log(`Journey fare (Westlands → Kikuyu): KES ${fare}`);
+
+console.log("\n--- Routes through CBD ---");
+const cbdRoutes = routesThroughStop(routes, "CBD");
+console.log(`All routes through CBD: ${cbdRoutes.join(", ")}`);
+
+console.log("\n\n✅ Assignment Complete! All tasks working.");
