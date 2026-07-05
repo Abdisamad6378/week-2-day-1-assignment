@@ -45,3 +45,68 @@ function countVowels(str) {
   }
   return count;
 }
+
+
+// ============================================
+// TASK 2: Kenyan County Object
+// ============================================
+
+const county1 = {
+  name: "Nairobi",
+  capital: "Nairobi City",
+  population: 4397073,
+  area: 696,
+  borders: ["Kiambu", "Machakos", "Kajiado"]
+};
+
+const county2 = {
+  name: "Mombasa",
+  capital: "Mombasa City",
+  population: 1208333,
+  area: 219.9,
+  borders: ["Kilifi", "Kwale"]
+};
+
+const county3 = {
+  name: "Kisumu",
+  capital: "Kisumu City",
+  population: 1157574,
+  area: 417,
+  borders: ["Vihiga", "Kakamega", "Nandi", "Kericho"]
+};
+
+// Format population with commas
+function formatPopulation(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// Display county information
+function displayCounty(county) {
+  return `${county.name} County | Capital: ${county.capital} | Population: ${formatPopulation(county.population)} | Area: ${county.area} km²`;
+}
+
+// Create borders string with 'and' before last item
+function bordersString(county) {
+  if (county.borders.length === 0) return `${county.name} has no bordering counties`;
+  if (county.borders.length === 1) return `${county.name} borders ${county.borders[0]}`;
+  
+  const allButLast = county.borders.slice(0, -1).join(", ");
+  const last = county.borders[county.borders.length - 1];
+  return `${county.name} borders ${allButLast}, and ${last}`;
+}
+
+// ============================================
+// TEST TASK 2
+// ============================================
+console.log("\n\n========== TASK 2: Kenyan County Object ==========");
+console.log("\n--- County 1: Nairobi ---");
+console.log(displayCounty(county1));
+console.log(bordersString(county1));
+
+console.log("\n--- County 2: Mombasa ---");
+console.log(displayCounty(county2));
+console.log(bordersString(county2));
+
+console.log("\n--- County 3: Kisumu ---");
+console.log(displayCounty(county3));
+console.log(bordersString(county3));
